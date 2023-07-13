@@ -111,7 +111,7 @@ window.addEventListener("keydown", (event) => {
     if (key === " ") {
         // checking is the typed word is correct or not
         // console.log(typedWord, words[index]);
-        if (typedWord.trim() === words[index++]) {
+        if (typedWord != "" && typedWord.trim() === words[index++]) {
             correctWord++;
 
             if(!para.previousElementSibling || (para.previousElementSibling && para.previousElementSibling.id !== "correct")){
@@ -129,6 +129,9 @@ window.addEventListener("keydown", (event) => {
         } 
         else {
             incorrectWord++;
+            if(typedWord === ""){
+                typedWord = words[index++];   
+            }
             if(!para.previousElementSibling || (para.previousElementSibling && para.previousElementSibling.id !== "incorrect")){
                 const incorrect = document.createElement('span');
                 incorrect.classList.add('incorrect');
@@ -198,11 +201,11 @@ capital.addEventListener('click', () => {
         capitalFlag = true;
         capital.classList.add('on');
         let text = defaultData;
-        if(numFlag){
+        if(!numFlag){
             // remove numbers from text
             text = text.replace(/[0-9]/g, '');
         }
-        if(specialFlag){
+        if(!specialFlag){
             // remove special characters from text
             text = text.replace(/[^a-zA-Z0-9\s]/g, '');
         }
@@ -225,15 +228,16 @@ special.addEventListener('click', () => {
     else{
         specialFlag = true;
         special.classList.add('on');
-        for(let i = 0; i < defaultData.length; i++){
-            if((defaultData[i] >= '!' && defaultData[i] <= '/') ||
-                (defaultData[i] >= ':' && defaultData[i] <= '@') ||
-                (defaultData[i] >= '[' && defaultData[i] <= '`') ||
-                (defaultData[i] >= '{' && defaultData[i] <= '~')){
-                // insert special character at index i
-                para.textContent = para.textContent.slice(0, position) + defaultData[i] + para.textContent.slice(position);
-            }
+        let text = defaultData;
+        if(!numFlag){
+            // remove numbers from text
+            text = text.replace(/[0-9]/g, '');
         }
+        if(!capitalFlag){
+            // remove capital letters from text
+            text = text.replace(/[A-Z]/g, '');
+        }
+        para.textContent = text;
         words = para.textContent.split(' ');
         words = words.filter((word) => word !== '' && word !== '\n');
     }

@@ -34,11 +34,9 @@ async function getData(){
     }
     // para.textContent = defaultData;
     // convert textcontent of para to array
-    console.log(capitalFlag, specialFlag, numFlag);
     capitalLetter();
     specialLetter();
     numLetter();
-    console.log(capitalFlag, specialFlag, numFlag);
     // console.log(words);
 }
 
@@ -242,6 +240,10 @@ restart.addEventListener('click', () => {
     m = 0, s = 0,time = stTime;
     wordCount = 0, correctWord = 0, incorrectWord = 0, accuracy = 0, wpm = 0, raw = 0, typedWord = '';
     index = 0;
+    console.log(stTime);
+    m = Math.floor(time / 60);
+    s = time % 60;
+    timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
     textBox.innerHTML = "";
     para = document.createElement('span');
     para.id = "para";
@@ -249,9 +251,6 @@ restart.addEventListener('click', () => {
     textBox.appendChild(para);
 
     getData();
-    m = Math.floor(time / 60);
-    s = time % 60;
-    timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
     wpmdiv.innerHTML = "00";
     rawdiv.innerHTML = "00";
     accuracydiv.innerHTML = "00";

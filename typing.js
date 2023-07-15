@@ -34,13 +34,78 @@ async function getData(){
     }
     // para.textContent = defaultData;
     // convert textcontent of para to array
+    console.log(capitalFlag, specialFlag, numFlag);
     capitalLetter();
     specialLetter();
     numLetter();
-    console.log(words);
+    console.log(capitalFlag, specialFlag, numFlag);
+    // console.log(words);
 }
 
 getData();
+
+// Function to add and remove capital letters
+function capitalLetter(){
+    if(!capitalFlag){
+        capital.classList.remove('on');
+        para.textContent = para.textContent.toLowerCase();
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+    else{
+        capital.classList.add('on');
+        let text = defaultData;
+        if(!numFlag){
+            // remove numbers from text
+            // text = text.replace(/[0-9]/g, '');
+            // remove numbers from text using concise method
+            text = text.replace(/\d/g, '');
+        }
+        if(!specialFlag){
+            // remove special characters from text
+            text = text.replace(/[^a-zA-Z0-9\s]/g, '');
+        }
+        para.textContent = text;
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+}
+
+// Function to add and remove special characters
+function specialLetter(){
+    if(!specialFlag){
+        special.classList.remove('on');
+        // remove special characters from text
+        para.textContent = para.textContent.replace(/[^a-zA-Z0-9\s]/g, '');
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+    else{
+        special.classList.add('on');
+        let text = defaultData;
+        if(!numFlag){
+            // remove numbers from text
+            text = text.replace(/[0-9]/g, '');
+        }
+        if(!capitalFlag){
+            // remove capital letters from text
+            text = text.toLowerCase();
+        }
+        para.textContent = text;
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+}
+
+// Function to add and remove numbers
+function numLetter(){
+    if(numFlag){
+        num.classList.add('on');
+    }
+    else{
+        num.classList.remove('on');
+    }
+}
 
 // Function to calculate wpm, raw and accuracy
 function calculateWpm() {
@@ -57,67 +122,6 @@ function calculateWpm() {
     wpmdiv.innerHTML = `${wpm.toFixed(2)}`;
     rawdiv.innerHTML = `${raw.toFixed(2)}`;
     accuracydiv.innerHTML = `${accuracy.toFixed(2)}`;
-}
-
-// Function to add and remove capital letters
-function capitalLetter(){
-    if(capitalFlag){
-        capital.classList.remove('on');
-        para.textContent = para.textContent.toLowerCase();
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-    else{
-        capital.classList.add('on');
-        let text = defaultData;
-        if(!numFlag){
-            // remove numbers from text
-            text = text.replace(/[0-9]/g, '');
-        }
-        if(!specialFlag){
-            // remove special characters from text
-            text = text.replace(/[^a-zA-Z0-9\s]/g, '');
-        }
-        para.textContent = text;
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-}
-
-// Function to add and remove special characters
-function specialLetter(){
-    if(specialFlag){
-        special.classList.remove('on');
-        // remove special characters from text
-        para.textContent = para.textContent.replace(/[^a-zA-Z0-9\s]/g, '');
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-    else{
-        special.classList.add('on');
-        let text = defaultData;
-        if(!numFlag){
-            // remove numbers from text
-            text = text.replace(/[0-9]/g, '');
-        }
-        if(!capitalFlag){
-            // remove capital letters from text
-            text = text.replace(/[A-Z]/g, '');
-        }
-        para.textContent = text;
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-}
-
-// Function to add and remove numbers
-function numLetter(){
-    if(numFlag){
-        num.classList.remove('on');
-    }
-    else{
-        num.classList.add('on');
-    }
 }
 
 // Updating time
@@ -255,20 +259,26 @@ restart.addEventListener('click', () => {
 
 // captial letters adding and removing
 capital.addEventListener('click', () => {
-    capitalLetter();
     capitalFlag = !capitalFlag;
+    capitalLetter();
+    console.log("Capital " + capitalFlag);
+    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // special characters adding and removing
 special.addEventListener('click', () => {
-    specialLetter();
     specialFlag = !specialFlag;
+    specialLetter();
+    console.log("Special " + specialFlag);
+    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // numbers adding and removing
 num.addEventListener('click', () => {
-    numLetter();
     numFlag = !numFlag;
+    numLetter();
+    console.log("Num " + numFlag);
+    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // Changing time for test and remove and add checked attribute in btns clicked value

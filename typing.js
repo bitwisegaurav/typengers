@@ -34,14 +34,15 @@ async function getData(){
     }
     // para.textContent = defaultData;
     // convert textcontent of para to array
-    words = para.textContent.split(' ');
-    // remove spaces from words array and \n
-    words = words.filter((word) => word !== '' && word !== '\n');
+    capitalLetter();
+    specialLetter();
+    numLetter();
     console.log(words);
 }
 
 getData();
 
+// Function to calculate wpm, raw and accuracy
 function calculateWpm() {
     if (correctWord === 0) {
         accuracy = 0;
@@ -58,16 +59,74 @@ function calculateWpm() {
     accuracydiv.innerHTML = `${accuracy.toFixed(2)}`;
 }
 
+// Function to add and remove capital letters
+function capitalLetter(){
+    if(capitalFlag){
+        capital.classList.remove('on');
+        para.textContent = para.textContent.toLowerCase();
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+    else{
+        capital.classList.add('on');
+        let text = defaultData;
+        if(!numFlag){
+            // remove numbers from text
+            text = text.replace(/[0-9]/g, '');
+        }
+        if(!specialFlag){
+            // remove special characters from text
+            text = text.replace(/[^a-zA-Z0-9\s]/g, '');
+        }
+        para.textContent = text;
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+}
+
+// Function to add and remove special characters
+function specialLetter(){
+    if(specialFlag){
+        special.classList.remove('on');
+        // remove special characters from text
+        para.textContent = para.textContent.replace(/[^a-zA-Z0-9\s]/g, '');
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+    else{
+        special.classList.add('on');
+        let text = defaultData;
+        if(!numFlag){
+            // remove numbers from text
+            text = text.replace(/[0-9]/g, '');
+        }
+        if(!capitalFlag){
+            // remove capital letters from text
+            text = text.replace(/[A-Z]/g, '');
+        }
+        para.textContent = text;
+        words = para.textContent.split(' ');
+        words = words.filter((word) => word !== '' && word !== '\n');
+    }
+}
+
+// Function to add and remove numbers
+function numLetter(){
+    if(numFlag){
+        num.classList.remove('on');
+    }
+    else{
+        num.classList.add('on');
+    }
+}
+
 // Updating time
 function chTime(){
     if(restartFlag){
         restartFlag = false;
-        m = Math.floor(stTime / 60);
-        s = stTime % 60;
-        timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
         return;
     }
-    else if(time > 0){
+    if(time > 0){
         time -= 1;
         m = Math.floor(time / 60);
         s = time % 60;
@@ -107,7 +166,7 @@ window.addEventListener("keydown", (event) => {
     let key = event.key;
     // console.log(key);
     if (time === stTime && key !== " " && event.key.length === 1) {
-        restartFlag = false;
+        // restartFlag = false;
         chTime();
     }
 
@@ -186,6 +245,9 @@ restart.addEventListener('click', () => {
     textBox.appendChild(para);
 
     getData();
+    m = Math.floor(time / 60);
+    s = time % 60;
+    timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
     wpmdiv.innerHTML = "00";
     rawdiv.innerHTML = "00";
     accuracydiv.innerHTML = "00";
@@ -193,69 +255,20 @@ restart.addEventListener('click', () => {
 
 // captial letters adding and removing
 capital.addEventListener('click', () => {
-    if(capitalFlag){
-        capitalFlag = false;
-        capital.classList.remove('on');
-        para.textContent = para.textContent.toLowerCase();
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-    else{
-        capitalFlag = true;
-        capital.classList.add('on');
-        let text = defaultData;
-        if(!numFlag){
-            // remove numbers from text
-            text = text.replace(/[0-9]/g, '');
-        }
-        if(!specialFlag){
-            // remove special characters from text
-            text = text.replace(/[^a-zA-Z0-9\s]/g, '');
-        }
-        para.textContent = text;
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
+    capitalLetter();
+    capitalFlag = !capitalFlag;
 });
 
 // special characters adding and removing
 special.addEventListener('click', () => {
-    if(specialFlag){
-        specialFlag = false;
-        special.classList.remove('on');
-        // remove special characters from text
-        para.textContent = para.textContent.replace(/[^a-zA-Z0-9\s]/g, '');
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
-    else{
-        specialFlag = true;
-        special.classList.add('on');
-        let text = defaultData;
-        if(!numFlag){
-            // remove numbers from text
-            text = text.replace(/[0-9]/g, '');
-        }
-        if(!capitalFlag){
-            // remove capital letters from text
-            text = text.replace(/[A-Z]/g, '');
-        }
-        para.textContent = text;
-        words = para.textContent.split(' ');
-        words = words.filter((word) => word !== '' && word !== '\n');
-    }
+    specialLetter();
+    specialFlag = !specialFlag;
 });
 
 // numbers adding and removing
 num.addEventListener('click', () => {
-    if(numFlag){
-        numFlag = false;
-        num.classList.remove('on');
-    }
-    else{
-        numFlag = true;
-        num.classList.add('on');
-    }
+    numLetter();
+    numFlag = !numFlag;
 });
 
 // Changing time for test and remove and add checked attribute in btns clicked value

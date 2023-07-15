@@ -61,7 +61,10 @@ function calculateWpm() {
 // Updating time
 function chTime(){
     if(restartFlag){
-        timediv.innerHTML = `1:00`;
+        restartFlag = false;
+        m = Math.floor(stTime / 60);
+        s = stTime % 60;
+        timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
         return;
     }
     else if(time > 0){
@@ -173,8 +176,8 @@ window.addEventListener("keydown", (event) => {
 restart.addEventListener('click', () => {
     // location.reload();
     restartFlag = true;
-    stTime = 60,m = 0, s = 0,time = stTime;
-    wordCount = 0, correctWord = 0, incorrectWord = 0, accuracy = 0, wpm = 0, raw, typedWord = '';
+    m = 0, s = 0,time = stTime;
+    wordCount = 0, correctWord = 0, incorrectWord = 0, accuracy = 0, wpm = 0, raw = 0, typedWord = '';
     index = 0;
     textBox.innerHTML = "";
     para = document.createElement('span');

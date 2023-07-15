@@ -16,7 +16,7 @@ let stTime = 60,m = 0, s = 0,time = stTime;
 let wordCount = 0, correctWord = 0, incorrectWord = 0, accuracy = 0, wpm = 0, raw, typedWord = '';
 let index = 0, words = [];
 let noOfFiles = 7;
-let capitalFlag = true, numFlag = true, specialFlag = true, restartFlag = false;
+let capitalFlag = false, numFlag = false, specialFlag = false, restartFlag = false;
 let defaultData = "Computer programming is the process of writing code to facilitate specific actions in a computer, application or software program, and instructs them on how to perform. Computer programmers are professionals that create instructions for a computer to execute by writing and testing code that enables applications and software programs to operate successfully.";
 
 // Fetching data from text files

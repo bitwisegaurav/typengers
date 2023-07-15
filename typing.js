@@ -261,24 +261,18 @@ restart.addEventListener('click', () => {
 capital.addEventListener('click', () => {
     capitalFlag = !capitalFlag;
     capitalLetter();
-    console.log("Capital " + capitalFlag);
-    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // special characters adding and removing
 special.addEventListener('click', () => {
     specialFlag = !specialFlag;
     specialLetter();
-    console.log("Special " + specialFlag);
-    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // numbers adding and removing
 num.addEventListener('click', () => {
     numFlag = !numFlag;
     numLetter();
-    console.log("Num " + numFlag);
-    console.log(capitalFlag, specialFlag, numFlag);
 });
 
 // Changing time for test and remove and add checked attribute in btns clicked value

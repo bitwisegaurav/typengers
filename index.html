@@ -6,171 +6,132 @@
     <title>Typing Practice</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <style>
-        *{
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family:sans-serif;
         }
-        body{
-            width: 100vw;
-            height: 100vh;
-            display: grid;
-            place-items: center;
+
+        body {
+            font-family: Arial, sans-serif;
             background-color: #f1f1f1;
         }
-        main{
-            width: 100%;
-            height: 80%;
-            min-height: 600px;
+
+        main {
             display: flex;
             flex-direction: column;
-            justify-content:space-evenly;
             align-items: center;
-            border: 1px solid #000;
+            padding: 2rem;
+            text-align: center;
         }
-        section{
-            width: 80%;
-            height: 80%;
+
+        .buttons {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border: 1px solid #000;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-        #textBox{
+
+        .buttons button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #e4e4e4;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons button.on {
+            background-color: #eeff00;
+        }
+
+        .buttons button:hover {
+            background-color: #dcdcdc;
+        }
+
+        section {
             width: 100%;
-            height: 80%;
-            border: 1px solid #000;
-            text-align: justify;
-            font-size: 1.3rem;
-            padding: 20px;
-            word-wrap: break-word;
-            overflow-y: hidden;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
-        #values{
-            border: 1px solid #000;
-            padding: 0 1.5rem;
+
+        #values {
+            margin-bottom: 1rem;
+            font-weight: bold;
         }
-        #input{
-            width: 100%;
-            height: 15%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+
+        #textBox {
+            min-height: 150px;
+            border: 1px solid #ccc;
             padding: 1rem;
-            border: 1px solid #000;
+            margin-bottom: 1rem;
+            overflow-y: scroll;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            text-align: justify;
         }
-        #input #inputFromUser{
-            width: calc(100% - 5rem);
-            height: calc(100% - 0.2rem);
+
+        #textBox::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #textBox::-webkit-scrollbar-thumb {
+            background-color: #999;
+            border-radius: 4px;
+        }
+
+        #input {
             display: flex;
             align-items: center;
-            border: 1px solid #000;;
+            gap: 1rem;
+        }
+
+        #inputFromUser {
+            flex: 1;
+            min-height: 40px;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        #time {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #restart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #eeff00;
+            border: none;
+            border-radius: 50%;
             font-size: 1.2rem;
-            outline: none;
-            padding: 0 10px;
-        }
-        #input #time{
-            width: 5rem;
-            height: calc(100% - 0.2rem);
-            border: 1px solid #000;
-            display: grid;
-            place-items: center;
-            font-weight: 600;
-            text-align: center;
-            margin-left: 10px;
-        }
-        #restart{
-            width: 5rem !important;
-            height: calc(100% - 0.2rem);
-            border: 1px solid #000;
-            font-weight: 600;
-            text-align: center;
-            display: grid;
-            place-items: center;
-            margin-left: 10px;
             cursor: pointer;
         }
-        .correct{
-            color: rgb(155, 155, 155);
+
+        #restart:hover {
+            background-color: #d6e600;
         }
-        .incorrect{
-            color: rgb(255, 40, 40);
+
+        #restart .material-icons-outlined {
+            vertical-align: middle;
         }
-        #check{
+
+        #check {
             position: absolute;
             bottom: 10px;
             right: 10px;
         }
-
-        /* Buttons */
-        .buttons{
-            width: 80%;
-            height: 15%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            border: 1px solid #000;
-        }
-        #textbutt, #testtime{
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-        button{
-            width: 20%;
-            min-width: 10rem;
-            height: 2.2rem;
-            background-color: #fff;
-            color: #818181;
-            border: 1px solid #b3b3b3;
-            cursor: pointer;
-            outline: none;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        button:hover{
-            background-color: #e4e4e4;
-            color: #000;
-            transition: 0.3s;
-        }
-        .on{
-            background-color: #eeff00;
-            color: #000;
-            border: none;
-        }
-        .on:hover{
-            background-color: #eeff00;
-            color: #000;
-        }
-        .button {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .button button {
-            border: 1px solid #b3b3b3;
-            background-color: transparent;
-            padding: 6px 12px;
-            cursor: pointer;
-        }
-        .button button:hover {
-            background-color: #f2ff7e;
-            transition: 0.3s;
-        }
-
-        .button button span {
-            display: inline-block;
-        }
-
-        .button button.active {
-            background-color: #eeff00;
-            color: #000;
-            border: none;
-        }
-
     </style>
+
 </head>
 <body>
     <!-- <span id="check"></span> -->

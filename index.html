@@ -1,188 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Practice</title>
+    <title>TYPENGERS</title>
+    <link rel="shortcut icon" href="t1f2.png" type="image/png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
+            font-family: sans-serif;
+            background-color: #CFDBD5;
+        }
+        header{
+            /* border: 1px solid #28246B; */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5rem;
+        }
+        #img2{
+            /* margin-top: 1rem; */
+            height: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        #img2::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #CFDBD5;
+            mix-blend-mode: darken;
+        }
+        #img2 img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #mainsec{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 9rem);
         }
 
         main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
+            width: 80%;
+            background-color: #28246B;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            /* letter-spacing: 1px; */
+            line-height: 1.5rem;
         }
 
         .buttons {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
 
-        .buttons button {
-            padding: 0.5rem 1rem;
+        #textbutt {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #CFDBD5;
+            color: #28246B;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
             font-size: 1rem;
-            font-weight: bold;
-            background-color: #e4e4e4;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.on {
+            background-color: #7E78D2;
+            color: #fff;
+        }
+
+        .button {
+            margin-left: 5px;
+        }
+
+        .btn {
+            background-color: #CFDBD5;
+            color: #28246B;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .buttons button.on {
-            background-color: #eeff00;
-        }
-
-        .buttons button:hover {
-            background-color: #dcdcdc;
-        }
-
-        section {
-            width: 100%;
-            max-width: 600px;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        .btn.active {
+            background-color: #7E78D2;
+            color: #fff;
         }
 
         #values {
-            margin-bottom: 1rem;
-            font-weight: bold;
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
         #textBox {
+            background-color: #CFDBD5;
+            color: #28246B;
+            padding: 10px;
+            font-size: large;
+            word-spacing: 5px;
+            border-radius: 5px;
             min-height: 150px;
-            border: 1px solid #ccc;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            overflow-y: scroll;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            text-align: justify;
+            overflow-y: auto;
         }
 
-        #textBox::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #textBox::-webkit-scrollbar-thumb {
-            background-color: #999;
-            border-radius: 4px;
+        #para {
+            /* display: block; */
+            word-wrap: break-word;
         }
 
         #input {
+            margin-top: 10px;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 20px;
         }
 
         #inputFromUser {
-            flex: 1;
-            min-height: 40px;
-            border: 1px solid #ccc;
-            padding: 0.5rem;
-            font-size: 1rem;
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            background-color: #CFDBD5;
+            color: #28246B;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
         }
 
         #time {
-            font-size: 1.5rem;
-            font-weight: bold;
+            color: #fff;
+            font-size: 18px;
         }
 
         #restart {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #eeff00;
+            background-color: #7E78D2;
+            color: #fff;
             border: none;
             border-radius: 50%;
-            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         #restart:hover {
-            background-color: #d6e600;
+            background-color: #CFDBD5;
+            color: #28246B;
         }
 
-        #restart .material-icons-outlined {
-            vertical-align: middle;
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined', sans-serif;
         }
 
-        #check {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
+        .correct {
+            color: #28246b7e;
+        }
+
+        .incorrect {
+            color: #ac1313;
+        }
+
+        @media (max-width: 1000px) {
+            main {
+                width: 90%;
+            }
         }
     </style>
-
 </head>
+
 <body>
-    <!-- <span id="check"></span> -->
-    <main>
-        <div class="buttons">
-            <div id="textbutt">
-                <button id="capital" class="on">Capital</button>
-                <button id="number" class="on">Number</button>
-                <button id="special" class="on">Special Characters</button>
+    <header>
+        <span id="img2">
+            <img src="logo1full1.jpg" alt="">
+        </span>
+    </header>
+    <section id="mainsec">
+        <main>
+            <div class="buttons">
+                <div id="textbutt">
+                    <button id="capital" class="on">Capital</button>
+                    <button id="number" class="on">Number</button>
+                    <button id="special" class="on">Special Characters</button>
+                </div>
+                <div id="testtime">
+                    <label for="button1" class="button">
+                        <button type="button" class="btn" data-value="15">
+                            <span>15 s</span>
+                        </button>
+                    </label>
+                    <label for="button2" class="button">
+                        <button type="button" class="btn" data-value="30">
+                            <span>30 s</span>
+                        </button>
+                    </label>
+                    <label for="button3" class="button">
+                        <button type="button" class="btn active" data-value="60">
+                            <span>1 min</span>
+                        </button>
+                    </label>
+                    <label for="button4" class="button">
+                        <button type="button" class="btn" data-value="120">
+                            <span>2 min</span>
+                        </button>
+                    </label>
+                </div>
             </div>
-            <div id="testtime">
-                <label for="button1" class="button">
-                    <button type="button" class="btn" data-value="15">
-                        <span>15 s</span>
+            <section>
+                <div id="values"> Wpm :
+                    <span id="wpm">00</span>,&nbsp;&nbsp;&nbsp;&nbsp; Raw :
+                    <span id="raw">00</span>,&nbsp;&nbsp;&nbsp;&nbsp; Accuracy :
+                    <span id="accuracy">00</span>%
+                </div>
+                <div id="textBox">
+                    <span id="para"></span>
+                </div>
+                <div id="input">
+                    <p id="inputFromUser"></p>
+                    <span id="time">1:00</span>
+                    <button id="restart">
+                        <span class="material-symbols-outlined">restart_alt</span>
                     </button>
-                </label>
-                <label for="button2" class="button">
-                    <button type="button" class="btn" data-value="30">
-                        <span>30 s</span>
-                    </button>
-                </label>
-                <label for="button3" class="button">
-                    <button type="button" class="btn active" data-value="60">
-                        <span>1 min</span>
-                    </button>
-                </label>
-                <label for="button4" class="button">
-                    <button type="button" class="btn" data-value="120">
-                        <span>2 min</span>
-                    </button>
-                </label>
-            </div>
-        </div>
-        <section>
-            <div id="values"> Wpm :  
-                <span id="wpm">00</span>,&nbsp;&nbsp;&nbsp;&nbsp; Raw :
-                <span id="raw">00</span>,&nbsp;&nbsp;&nbsp;&nbsp; Accuracy :
-                <span id="accuracy">00</span>%
-            </div>
-            <div id="textBox">
-                <span id="para"></span>
-            </div>
-            <div id="input">
-                <p id="inputFromUser"></p>
-                <span id="time">1:00</span>
-                <button id="restart">
-                    <span class="material-symbols-outlined">restart_alt</span>
-                </button>
-            </div>
-        </section>
-    </main>
+                </div>
+            </section>
+        </main>
+    </section>
 </body>
 <script src="typing.js"></script>
+
 </html>

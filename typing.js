@@ -134,13 +134,6 @@ function chTime(){
         s = time % 60;
         // console.log(m, s);
         timediv.innerHTML = `${m}:${s.toString().padStart(2, '0')}`;
-        // const inputbox = document.getElementById('input');
-        // let paraheight = para.offsetHeight;
-        // let avg = (textBox.offsetHeight + inputbox.offsetHeight)/2;
-        // if(avg > paraheight){
-        // }
-        // textBox.offsetHeight -= 0.1*(document.documentElement.clientHeight);
-        // console.log(textBox.offsetHeight, para.offsetHeight, avg, document.documentElement.clientHeight);
         calculateWpm();
         setTimeout(chTime, 1000);
     }
@@ -168,7 +161,6 @@ window.addEventListener("keydown", (event) => {
     let key = event.key;
     // console.log(key);
     if (time === stTime && key !== " " && event.key.length === 1) {
-        // restartFlag = false;
         chTime();
     }
 
